@@ -32,7 +32,7 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
     } = useForm<IForm>();
     const step = 100 / quiz.length;
     const stepCloud = 224 / quiz.length;
-
+    // omagas
     const onSubmit: SubmitHandler<IForm> = (data) => {
         console.log(data, 'СУБМИТЕ');
         setCounter(0);
