@@ -11,3 +11,7 @@ export interface IForm {
 export interface IFiller {
     completed: number;
 }
+
+export interface ICloudWrapper {
+    completed: number;
+}

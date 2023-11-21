@@ -14,7 +14,7 @@ const RadioQuestion: React.FC<IRadioQuestion> = ({ name, radio, title, onClick, 
                     <Radio key={index}>
                         {index == 0 ? (
                             <Input
-                                {...register('name')}
+                                {...register(name, { required: true })}
                                 id={`${index}`}
                                 type="radio"
                                 name="radio"
@@ -23,7 +23,7 @@ const RadioQuestion: React.FC<IRadioQuestion> = ({ name, radio, title, onClick, 
                             />
                         ) : (
                             <Input
-                                {...register('name')}
+                                {...register(name, { required: true })}
                                 id={`${index}`}
                                 type="radio"
                                 name="radio"

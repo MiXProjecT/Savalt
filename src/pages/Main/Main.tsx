@@ -28,13 +28,12 @@ const descriptionList: IDescriptionList[] = [
 ];
 const quiz: IQuizList[] = [
     {
-        id: 0,
         title: 'Стаж вождения категории Е',
         type: 'generalShape',
         inputs: [
             {
-                title: '',
-                name: 'EXPA',
+                title: 'Выберите один из вариантов',
+                name: 'Опыт',
                 type: 'select',
                 answers: [
                     { value: 'menee_1_goda', label: 'Менее 1 года' },
@@ -43,23 +42,11 @@ const quiz: IQuizList[] = [
                     { value: 'bolle_10_goda', label: 'Более 10 лет' },
                 ],
             },
-            { title: 'Введите имя', type: 'input', placeholder: '', name: 'IMYA' },
+            { title: 'Введите имя', type: 'input', placeholder: '', name: 'Сколько лет' },
         ],
     },
     {
-        id: 2,
-        title: 'Стаж вождения категории Е',
-        type: 'picture',
-        name: 'example',
-        answers: [
-            { image: image1, key: '0', answer: 'Девушка' },
-            { image: image2, key: '1', answer: 'Мужик' },
-            { image: image3, key: '2', answer: 'Люди' },
-        ],
-    },
-    {
-        id: 3,
-        name: 'schedule',
+        name: 'grafik',
         title: 'Желаемый график работы?',
         type: 'checkmark',
         answers: [
@@ -69,8 +56,27 @@ const quiz: IQuizList[] = [
         ],
     },
     {
-        id: 4,
-        name: 'rights',
+        title: 'Стаж вождения категории Е',
+        type: 'picture',
+        name: 'Пол',
+        answers: [
+            { image: image1, key: 'Мужик', answer: 'Мужик' },
+            { image: image2, key: 'Девушка', answer: 'Девушка' },
+            { image: image3, key: 'Люди', answer: 'Люди' },
+        ],
+    },
+    {
+        name: 'График',
+        title: 'Желаемый график работы?',
+        type: 'checkmark',
+        answers: [
+            { label: '15/15', value: '15_15' },
+            { label: '21/7', value: '21_7' },
+            { label: '30/10', value: '30_10' },
+        ],
+    },
+    {
+        name: 'Права',
         title: 'Есть ли судимость/лишались ли прав?',
         type: 'radio',
         answers: [

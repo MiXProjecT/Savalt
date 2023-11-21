@@ -4,23 +4,9 @@ export interface IDescriptionList {
     icon: string;
 }
 
-export type InputType = {
-    readonly name: string;
-    type: 'input';
-    title: string;
-    placeholder: string;
-};
-
 export type AnswerTypeSelect = {
     label: string;
     value: string;
-};
-
-export type SelectsTypeSelect = {
-    title: string;
-    type: 'select';
-    readonly name: string;
-    answers: AnswerTypeSelect[];
 };
 
 export type AnswerTypeCheckmark = {
@@ -29,10 +15,9 @@ export type AnswerTypeCheckmark = {
 };
 
 interface ICheckmark {
-    id: number;
     readonly name: string;
     title: string;
-    type: 'checkmark';
+    readonly type: 'checkmark';
     answers: AnswerTypeCheckmark[];
 }
 
@@ -42,10 +27,9 @@ export type AnswerTypeRadioButtons = {
 };
 
 interface IRadioButtons {
-    id: number;
     readonly name: string;
     title: string;
-    type: 'radio';
+    readonly type: 'radio';
     answers: AnswerTypeRadioButtons[];
 }
 
@@ -56,19 +40,32 @@ export type AnswerTypeIPicture = {
 };
 
 interface IPicture {
-    id: number;
     readonly name: string;
     title: string;
-    type: 'picture';
+    readonly type: 'picture';
     answers: AnswerTypeIPicture[];
 }
 
-export type GeneralShapeType = InputType | SelectsTypeSelect;
+export type SelectsType = {
+    title: string;
+    readonly type: 'select';
+    readonly name: string;
+    answers: AnswerTypeSelect[];
+};
+
+export type InputType = {
+    readonly name: string;
+    readonly type: 'input';
+    title: string;
+    placeholder: string;
+};
+
+export type GeneralShapeType = InputType | SelectsType;
 
 interface IInputFields {
-    id: number;
     title: string;
-    type: 'generalShape';
+    readonly type: 'generalShape';
     inputs: GeneralShapeType[];
 }
+
 export type IQuizList = ICheckmark | IRadioButtons | IPicture | IInputFields;

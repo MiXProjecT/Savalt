@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
-import { Root, TitleWrapper, Form, ControlButtonsWrapper, ProgressBar, Filler } from './styles';
+import {
+    Root,
+    TitleWrapper,
+    Form,
+    ControlButtonsWrapper,
+    ProgressBar,
+    Filler,
+    CloudWrapper,
+    ProgressBarWrapper,
+    CounterWrapper,
+} from './styles';
 import { Button, Link, Typography } from '../../../../components';
-import { RadioQuestion, Input, SelectQuestion, CheckmarkQuestion, PictureQuestion, GeneralShape } from './components';
+import { RadioQuestion, CheckmarkQuestion, PictureQuestion, GeneralShape, Cloud } from './components';
 import { IQuiz } from './types';
 import { IForm } from './types';
 import { IQuizList } from '../../types';
@@ -9,19 +19,34 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 const Quiz: React.FC<IQuiz> = ({ quiz }) => {
     const [counter, setCounter] = useState(0);
+    const [valuesForm, setValuesForm] = useState<IForm>({});
     const {
         register,
         handleSubmit,
         control,
+        getValues,
+        trigger,
+        clearErrors,
         formState: { errors },
     } = useForm<IForm>();
-    const step = 100 / (quiz.length - 1);
-    const onSubmit: SubmitHandler<IForm> = (data) => console.log(data);
+    const step = 100 / quiz.length;
+    const stepCloud = 224 / quiz.length;
+
+    const onSubmit: SubmitHandler<IForm> = (data) => {
+        console.log(data, 'СУБМИТЕ');
+        setCounter(0);
+    };
 
     const next = () => {
-        setTimeout(() => {
-            setCounter((prev) => prev + 1);
-        }, 100);
+        clearErrors();
+        trigger().then((result) => {
+            if (result) {
+                setTimeout(() => {
+                    setCounter((prev) => prev + 1);
+                }, 100);
+                setValuesForm(getValues());
+            }
+        });
     };
 
     const previous = () => {
@@ -30,13 +55,13 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
         }, 100);
     };
 
-    const typeChecking = (quizElement: IQuizList) => {
+    const typeChecking = (quizElement: IQuizList, index: number) => {
         switch (quizElement.type) {
             case 'radio':
                 return (
                     <RadioQuestion
                         register={register}
-                        key={quizElement.id}
+                        key={index}
                         radio={quizElement.answers}
                         title={quizElement.title}
                         onClick={next}
@@ -47,10 +72,11 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                 return (
                     <CheckmarkQuestion
                         register={register}
-                        key={quizElement.id}
+                        key={index}
                         name={quizElement.name}
                         title={quizElement.title}
                         answers={quizElement.answers}
+                        errors={errors}
                     />
                 );
             case 'picture':
@@ -58,7 +84,7 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                     <PictureQuestion
                         onClick={next}
                         register={register}
-                        key={quizElement.id}
+                        key={index}
                         name={quizElement.name}
                         title={quizElement.title}
                         answer={quizElement.answers}
@@ -67,9 +93,10 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
             case 'generalShape':
                 return (
                     <GeneralShape
+                        errors={errors}
                         control={control}
                         register={register}
-                        key={quizElement.id}
+                        key={index}
                         title={quizElement.title}
                         inputs={quizElement.inputs}
                     />
@@ -78,8 +105,7 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                 alert('Нет таких значений');
         }
     };
-    const quizList = quiz.map((quizElement) => typeChecking(quizElement));
-
+    const quizList = quiz.map((quizElement, index) => typeChecking(quizElement, index));
     return (
         <Root>
             <TitleWrapper>
@@ -109,9 +135,26 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                 </Typography>
             </TitleWrapper>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <ProgressBar>
-                    <Filler completed={step * counter} />
-                </ProgressBar>
+                <ProgressBarWrapper>
+                    <CloudWrapper completed={stepCloud * (counter + 1) - 26}>
+                        <CounterWrapper>
+                            <Typography
+                                tag="p"
+                                weight="regular"
+                                size="subtext"
+                                textDecoration="none"
+                                textAlign="left"
+                                color="white"
+                            >
+                                {counter + 1} / {quiz.length}
+                            </Typography>
+                        </CounterWrapper>
+                        <Cloud color="#e75a45" />
+                    </CloudWrapper>
+                    <ProgressBar>
+                        <Filler completed={step * (counter + 1)} />
+                    </ProgressBar>
+                </ProgressBarWrapper>
                 {quizList[counter]}
                 <ControlButtonsWrapper>
                     {counter != 0 ? (

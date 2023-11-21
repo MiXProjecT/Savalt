@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IFiller } from './types';
+import { ICloudWrapper, IFiller } from './types';
 
 export const Root = styled.section`
     display: flex;
@@ -59,7 +59,7 @@ export const ControlButtonsWrapper = styled.div`
 
 export const ProgressBar = styled.div`
     height: 6px;
-    width: 14rem;
+    width: 224px;
     background-color: #e8bfb7;
     border-radius: 50px;
 `;
@@ -70,4 +70,26 @@ export const Filler = styled.div<IFiller>`
     background-color: #e75a45;
     border-radius: inherit;
     transition: width 1s ease-in-out;
+`;
+
+export const CloudWrapper = styled.div<ICloudWrapper>`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(${({ completed }) => completed}px);
+    transition: transform 1s ease-in-out;
+`;
+
+export const ProgressBarWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 3.2px;
+`;
+
+export const CounterWrapper = styled.div`
+    position: relative;
+    top: 22px;
 `;

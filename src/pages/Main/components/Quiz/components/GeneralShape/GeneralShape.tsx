@@ -1,11 +1,11 @@
 import React from 'react';
-import { Root, SelectWrapper, StyledSelect, InputTitleWrapper, InputField } from './styles';
+import { Root, SelectWrapper, StyledSelect, InputTitleWrapper, InputField, ErrorsWrapper } from './styles';
 import { IGeneralShape } from './types';
 import { Typography } from '../../../../../../components';
 import { Controller } from 'react-hook-form';
 import { GeneralShapeType } from '../../../../types';
 
-const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, register }) => {
+const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, register, errors }) => {
     const typeChecking = (generalShapeInputs: GeneralShapeType, index: number) => {
         switch (generalShapeInputs.type) {
             case 'select':
@@ -51,11 +51,26 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
                         >
                             {generalShapeInputs.title}
                         </Typography>
-                        <InputField
-                            {...register(generalShapeInputs.name)}
-                            type="text"
-                            placeholder={generalShapeInputs.placeholder}
-                        />
+                        <ErrorsWrapper>
+                            <InputField
+                                errors={!!errors[generalShapeInputs.name]}
+                                {...register(generalShapeInputs.name, { required: true, minLength: 2 })}
+                                type="text"
+                                placeholder={generalShapeInputs.placeholder}
+                            />
+                            {errors[generalShapeInputs.name] && (
+                                <Typography
+                                    tag="p"
+                                    weight="regular"
+                                    size="subtext"
+                                    textDecoration="none"
+                                    textAlign="center"
+                                    color="orange"
+                                >
+                                    Поле должно быть заполнено
+                                </Typography>
+                            )}
+                        </ErrorsWrapper>
                     </InputTitleWrapper>
                 );
             default:
