@@ -12,6 +12,7 @@ const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, register
             <CheckmarkWrapper>
                 {answers.map((answerItem, index) => (
                     <Label key={index} htmlFor={`${index}`} errors={!!errors[name]}>
+                        {/* Поправить defaultChecked index === 0 */}
                         {index == 0 ? (
                             <Input
                                 {...register(name, { required: true })}

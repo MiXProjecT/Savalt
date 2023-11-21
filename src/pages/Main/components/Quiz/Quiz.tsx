@@ -19,6 +19,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 const Quiz: React.FC<IQuiz> = ({ quiz }) => {
     const [counter, setCounter] = useState(0);
+    // Что это за нахуй
     const [valuesForm, setValuesForm] = useState<IForm>({});
     const {
         register,
@@ -37,6 +38,7 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
         setCounter(0);
     };
 
+    // убрать clearErrors()
     const next = () => {
         clearErrors();
         trigger().then((result) => {
@@ -44,6 +46,7 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                 setTimeout(() => {
                     setCounter((prev) => prev + 1);
                 }, 100);
+                console.log(getValues());
                 setValuesForm(getValues());
             }
         });
@@ -55,6 +58,8 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
         }, 100);
     };
 
+    // Вынести в отдельный компонет
+    // key - index - хуйня, удалить поставить name
     const typeChecking = (quizElement: IQuizList, index: number) => {
         switch (quizElement.type) {
             case 'radio':
@@ -102,10 +107,14 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                     />
                 );
             default:
+                // ????? return null
                 alert('Нет таких значений');
         }
     };
     const quizList = quiz.map((quizElement, index) => typeChecking(quizElement, index));
+
+    // <Questions>{map((elem) => <Page id="1"> isVisible={elem.id === currentPage}>) </Questions>
+
     return (
         <Root>
             <TitleWrapper>
@@ -155,7 +164,9 @@ const Quiz: React.FC<IQuiz> = ({ quiz }) => {
                         <Filler completed={step * (counter + 1)} />
                     </ProgressBar>
                 </ProgressBarWrapper>
+
                 {quizList[counter]}
+
                 <ControlButtonsWrapper>
                     {counter != 0 ? (
                         <Button onClick={previous} variant="control" type="button">
