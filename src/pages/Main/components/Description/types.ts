@@ -1,5 +1,5 @@
-import { IDescriptionList } from '../../types';
-
-export interface IDescription {
-    descriptions: IDescriptionList[];
+export interface IDescriptionList {
+    id: number;
+    description: string;
+    icon: string;
 }
