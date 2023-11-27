@@ -4,14 +4,14 @@ import { RadioQuestion, CheckmarkQuestion, PictureQuestion, GeneralShape } from 
 import { QUIZ_LIST } from '../../constants';
 import { IQuestionModule } from './types';
 
-const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, control, counter }) => {
-    const typeChecking = (quizElement: IQuizList, index: number) => {
+const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, control, counter, setValue }) => {
+    const typeChecking = (quizElement: IQuizList) => {
         switch (quizElement.type) {
             case 'radio':
                 return (
                     <RadioQuestion
                         register={register}
-                        key={index}
+                        key={`question_module-${quizElement.id}`}
                         radio={quizElement.answers}
                         title={quizElement.title}
                         onClick={next}
@@ -21,8 +21,8 @@ const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, con
             case 'checkmark':
                 return (
                     <CheckmarkQuestion
-                        register={register}
-                        key={index}
+                        control={control}
+                        key={`checkmark_question-${quizElement.id}`}
                         name={quizElement.name}
                         title={quizElement.title}
                         answers={quizElement.answers}
@@ -34,7 +34,7 @@ const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, con
                     <PictureQuestion
                         onClick={next}
                         register={register}
-                        key={index}
+                        key={`picture_question-${quizElement.id}`}
                         name={quizElement.name}
                         title={quizElement.title}
                         answer={quizElement.answers}
@@ -46,17 +46,17 @@ const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, con
                         errors={errors}
                         control={control}
                         register={register}
-                        key={index}
+                        key={`general_shape-${quizElement.id}`}
                         title={quizElement.title}
                         inputs={quizElement.inputs}
                     />
                 );
             default:
-                alert('Нет таких значений');
+                return undefined;
         }
     };
 
-    const quizList = QUIZ_LIST.map((quizElement, index) => typeChecking(quizElement, index));
+    const quizList = QUIZ_LIST.map((quizElement) => typeChecking(quizElement));
 
     return <>{quizList[counter]}</>;
 };

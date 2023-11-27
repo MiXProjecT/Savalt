@@ -2,18 +2,15 @@ import { createElement, FC } from 'react';
 import { ITypography, IStyleTypography } from './types';
 import { StyleTypography } from './styles';
 
-const Typography: FC<ITypography> = ({ tag, weight, size, textDecoration, textAlign, color, ...rest }) =>
+const Typography: FC<ITypography> = ({ tag, variant, color, children, className }) =>
     createElement<IStyleTypography>(
         tag,
         {
-            className: rest.className,
-            weight,
-            size,
-            textDecoration,
-            textAlign,
+            className,
             color,
+            variant,
         },
-        rest.children,
+        children,
     );
 
 export default StyleTypography(Typography);

@@ -6,21 +6,14 @@ import { DESCRIPTION_LIST } from './constants';
 const Description = () => {
     return (
         <Root>
-            <Typography tag="h2" weight="bold" size="title" textDecoration="none" textAlign="center" color="orange">
+            <Typography tag="h2" variant="title1bold1center" color="orange">
                 УСЛОВИЯ
             </Typography>
             <ListWrapper>
                 {DESCRIPTION_LIST.map((description) => (
                     <ListItem key={description.id}>
                         <ListIcon src={description.icon} />
-                        <Typography
-                            tag="p"
-                            weight="regular"
-                            size="bigDescription"
-                            textDecoration="none"
-                            textAlign="left"
-                            color="black"
-                        >
+                        <Typography tag="p" variant="largeBody1regular1left" color="black">
                             {description.description}
                         </Typography>
                     </ListItem>

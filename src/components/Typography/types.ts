@@ -4,18 +4,28 @@ export interface ITypography {
     tag: string;
     children: string | React.ReactNode;
     className?: string;
-    textDecoration: string;
-    textAlign: string;
     color: 'orange' | 'black' | 'white';
-    weight: 'bold' | 'medium' | 'regular';
-    size: 'mainTitle' | 'title' | 'subTitle' | 'description' | 'bigDescription' | 'smallDescription' | 'subtext';
+    variant:
+        | 'head1bold1left'
+        | 'title1bold1center'
+        | 'smallTitle1bold1center'
+        | 'smallTitle1bold1left'
+        | 'body1regular1left'
+        | 'body1regular1center'
+        | 'largeBody1regular1left'
+        | 'smallBody1regular1left';
 }
 
 export interface IStyleTypography {
     className?: string;
-    textDecoration: string;
-    textAlign: string;
     color: 'orange' | 'black' | 'white';
-    weight: 'bold' | 'medium' | 'regular';
-    size: 'mainTitle' | 'title' | 'subTitle' | 'description' | 'bigDescription' | 'smallDescription' | 'subtext';
+    variant:
+        | 'head1bold1left'
+        | 'title1bold1center'
+        | 'smallTitle1bold1center'
+        | 'smallTitle1bold1left'
+        | 'body1regular1left'
+        | 'body1regular1center'
+        | 'largeBody1regular1left'
+        | 'smallBody1regular1left';
 }

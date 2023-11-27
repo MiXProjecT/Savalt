@@ -20,14 +20,7 @@ const Home = () => {
                 <LogoManagersPhoneWrapper>
                     <Logo src={logo} />
                     <ManagersPhoneWrapper>
-                        <Typography
-                            tag="p"
-                            weight="regular"
-                            size="description"
-                            textDecoration="none"
-                            textAlign="left"
-                            color="black"
-                        >
+                        <Typography tag="p" variant="body1regular1left" color="black">
                             Менеджер по персоналу Виктория:&nbsp;
                             <Link
                                 color="orange"
@@ -42,44 +35,16 @@ const Home = () => {
                         </Typography>
                     </ManagersPhoneWrapper>
                 </LogoManagersPhoneWrapper>
-                <Typography
-                    tag="h1"
-                    weight="bold"
-                    size="mainTitle"
-                    textDecoration="none"
-                    textAlign="left"
-                    color="orange"
-                >
+                <Typography tag="h1" variant="head1bold1left" color="orange">
                     ОТКРЫТ КОНКУРС НА ВАКАНСИЮ ВОДИТЕЛЬ КАТЕГОРИИ СЕ (Е)
                 </Typography>
                 <DescriptionWrapper>
-                    <Typography
-                        tag="p"
-                        weight="bold"
-                        size="subTitle"
-                        textDecoration="none"
-                        textAlign="left"
-                        color="black"
-                    >
+                    <Typography tag="p" variant="smallTitle1bold1left" color="black">
                         Екатеринбург и Свердловская обл.
                     </Typography>
-                    <Typography
-                        tag="p"
-                        weight="regular"
-                        size="description"
-                        textDecoration="none"
-                        textAlign="left"
-                        color="black"
-                    >
-                        Оф. белая ЗП до 260 000 ₽ + фиксированный график и больничные.{' '}
-                        <Typography
-                            tag="strong"
-                            weight="bold"
-                            size="description"
-                            textDecoration="none"
-                            textAlign="left"
-                            color="black"
-                        >
+                    <Typography tag="p" variant="body1regular1left" color="black">
+                        Оф. белая ЗП до 260 000 ₽ + фиксированный график и больничные.
+                        <Typography tag="strong" variant="body1regular1left" color="black">
                             Обязателен опыт от 1 года
                         </Typography>
                     </Typography>

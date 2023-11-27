@@ -9,14 +9,7 @@ const Header = () => {
             <LogoManagersPhoneWrapper>
                 <Logo src={logo} />
                 <ManagersPhoneWrapper>
-                    <Typography
-                        tag="p"
-                        weight="regular"
-                        size="description"
-                        textDecoration="none"
-                        textAlign="left"
-                        color="black"
-                    >
+                    <Typography tag="p" variant="body1regular1left" color="black">
                         Менеджер по персоналу Виктория:&nbsp;
                         <Link
                             color="orange"

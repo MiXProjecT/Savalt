@@ -1,5 +1,5 @@
 export interface IForm {
-    [key: string]: string;
+    [key: string]: string | string[];
 }
 
 export interface IFiller {
@@ -21,6 +21,7 @@ export type AnswerTypeCheckmark = {
 };
 
 interface ICheckmark {
+    id: number;
     readonly name: string;
     title: string;
     readonly type: 'checkmark';
@@ -33,6 +34,7 @@ export type AnswerTypeRadioButtons = {
 };
 
 interface IRadioButtons {
+    id: number;
     readonly name: string;
     title: string;
     readonly type: 'radio';
@@ -46,6 +48,7 @@ export type AnswerTypeIPicture = {
 };
 
 interface IPicture {
+    id: number;
     readonly name: string;
     title: string;
     readonly type: 'picture';
@@ -69,6 +72,7 @@ export type InputType = {
 export type GeneralShapeType = InputType | SelectsType;
 
 interface IInputFields {
+    id: number;
     title: string;
     readonly type: 'generalShape';
     inputs: GeneralShapeType[];

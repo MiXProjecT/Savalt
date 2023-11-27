@@ -6,11 +6,11 @@ import { Typography } from '../../../../../../../../../../components';
 const PictureQuestion: React.FC<IPictureQuestion> = ({ name, answer, title, register, onClick }) => {
     return (
         <Root>
-            <Typography tag="h3" weight="bold" size="subTitle" textDecoration="none" textAlign="center" color="black">
+            <Typography tag="h3" variant="smallTitle1bold1center" color="black">
                 {title}
             </Typography>
             <RadioWrapper>
-                {answer.map((choiceAnswer, index) => (
+                {answer.map((pictureAnswer, index) => (
                     <Radio key={index}>
                         {index == 0 ? (
                             <Input
@@ -18,7 +18,7 @@ const PictureQuestion: React.FC<IPictureQuestion> = ({ name, answer, title, regi
                                 id={`${index}`}
                                 type="radio"
                                 name="radio"
-                                value={choiceAnswer.key}
+                                value={pictureAnswer.key}
                                 defaultChecked
                             />
                         ) : (
@@ -27,20 +27,13 @@ const PictureQuestion: React.FC<IPictureQuestion> = ({ name, answer, title, regi
                                 id={`${index}`}
                                 type="radio"
                                 name="radio"
-                                value={choiceAnswer.key}
+                                value={pictureAnswer.key}
                             />
                         )}
                         <Label onClick={onClick} htmlFor={`${index}`}>
-                            <Image src={choiceAnswer.image} />
-                            <Typography
-                                tag="p"
-                                weight="regular"
-                                size="description"
-                                textDecoration="none"
-                                textAlign="center"
-                                color="black"
-                            >
-                                {choiceAnswer.answer}
+                            <Image src={pictureAnswer.image} />
+                            <Typography tag="p" variant="body1regular1center" color="black">
+                                {pictureAnswer.answer}
                             </Typography>
                         </Label>
                     </Radio>

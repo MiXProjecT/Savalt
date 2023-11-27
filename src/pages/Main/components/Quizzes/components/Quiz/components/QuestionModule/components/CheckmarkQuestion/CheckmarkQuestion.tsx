@@ -1,49 +1,37 @@
-import React from 'react';
-import { Root, Label, Input, Span, CheckmarkWrapper } from './styles';
+import React, { useState } from 'react';
+import { Root } from './styles';
 import { ICheckmarkQuestion } from './types';
 import { Typography } from '../../../../../../../../../../components';
+import { CheckboxGroup } from './components';
+import { Controller } from 'react-hook-form';
 
-const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, register, answers, errors }) => {
+const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, answers, errors, control }) => {
     return (
         <Root>
-            <Typography tag="h3" weight="bold" size="subTitle" textDecoration="none" textAlign="center" color="black">
+            <Typography tag="h3" variant="smallTitle1bold1center" color="black">
                 {title}
             </Typography>
-            <CheckmarkWrapper>
-                {answers.map((answerItem, index) => (
-                    <Label key={index} htmlFor={`${index}`} errors={!!errors[name]}>
-                        {index == 0 ? (
-                            <Input
-                                {...register(name, { required: true })}
-                                type="checkbox"
-                                value={answerItem.value}
-                                id={`${index}`}
-                                defaultChecked
-                            />
-                        ) : (
-                            <Input
-                                type="checkbox"
-                                value={answerItem.value}
-                                id={`${index}`}
-                                {...register(name, { required: true })}
-                            />
-                        )}
-                        <Span>{answerItem.label}</Span>
-                    </Label>
-                ))}
+            <div>
+                <Controller
+                    defaultValue={answers[0].value}
+                    name={name}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field: { onChange } }) => (
+                        <CheckboxGroup
+                            defaultValue={answers[0].value}
+                            errors={!!errors[name]}
+                            answers={answers}
+                            onCheckChange={onChange}
+                        />
+                    )}
+                />
                 {errors[name] && (
-                    <Typography
-                        tag="p"
-                        weight="regular"
-                        size="subtext"
-                        textDecoration="none"
-                        textAlign="center"
-                        color="orange"
-                    >
+                    <Typography tag="p" variant="smallBody1regular1left" color="orange">
                         Выберите вариант
                     </Typography>
                 )}
-            </CheckmarkWrapper>
+            </div>
         </Root>
     );
 };

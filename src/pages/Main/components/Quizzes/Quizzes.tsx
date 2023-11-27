@@ -7,17 +7,10 @@ const Quizzes = () => {
     return (
         <Root>
             <TitleWrapper>
-                <Typography tag="h2" weight="bold" size="title" textDecoration="none" textAlign="center" color="orange">
+                <Typography tag="h2" variant="title1bold1center" color="orange">
                     ВЫБЕРИТЕ, ЧТО ВАМ ВАЖНО В РАБОТЕ, И МЫ С ВАМИ СВЯЖЕМСЯ
                 </Typography>
-                <Typography
-                    tag="p"
-                    weight="bold"
-                    size="description"
-                    textDecoration="none"
-                    textAlign="center"
-                    color="black"
-                >
+                <Typography tag="p" variant="body1regular1center" color="black">
                     Или просто позвоните нам:
                     <Link
                         color="orange"

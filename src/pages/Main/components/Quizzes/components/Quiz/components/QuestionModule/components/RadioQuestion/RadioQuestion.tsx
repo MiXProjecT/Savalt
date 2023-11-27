@@ -6,7 +6,7 @@ import { Typography } from '../../../../../../../../../../components';
 const RadioQuestion: React.FC<IRadioQuestion> = ({ name, radio, title, onClick, register }) => {
     return (
         <Root>
-            <Typography tag="h3" weight="bold" size="subTitle" textDecoration="none" textAlign="center" color="black">
+            <Typography tag="h3" variant="smallTitle1bold1center" color="black">
                 {title}
             </Typography>
             <RadioWrapper>

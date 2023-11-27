@@ -10,15 +10,8 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
         switch (generalShapeInputs.type) {
             case 'select':
                 return (
-                    <SelectWrapper key={index}>
-                        <Typography
-                            tag="p"
-                            weight="regular"
-                            size="description"
-                            textDecoration="none"
-                            textAlign="left"
-                            color="black"
-                        >
+                    <SelectWrapper key={generalShapeInputs.name}>
+                        <Typography tag="p" variant="body1regular1left" color="black">
                             {generalShapeInputs.title}
                         </Typography>
                         <Controller
@@ -40,15 +33,8 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
                 );
             case 'input':
                 return (
-                    <InputTitleWrapper key={index}>
-                        <Typography
-                            tag="label"
-                            weight="regular"
-                            size="description"
-                            textDecoration="none"
-                            textAlign="center"
-                            color="black"
-                        >
+                    <InputTitleWrapper key={generalShapeInputs.name}>
+                        <Typography tag="label" variant="body1regular1left" color="black">
                             {generalShapeInputs.title}
                         </Typography>
                         <ErrorsWrapper>
@@ -59,14 +45,7 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
                                 placeholder={generalShapeInputs.placeholder}
                             />
                             {errors[generalShapeInputs.name] && (
-                                <Typography
-                                    tag="p"
-                                    weight="regular"
-                                    size="subtext"
-                                    textDecoration="none"
-                                    textAlign="center"
-                                    color="orange"
-                                >
+                                <Typography tag="p" variant="smallBody1regular1left" color="orange">
                                     Поле должно быть заполнено
                                 </Typography>
                             )}
@@ -80,7 +59,7 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
 
     return (
         <Root>
-            <Typography tag="h3" weight="bold" size="subTitle" textDecoration="none" textAlign="center" color="black">
+            <Typography tag="h3" variant="smallTitle1bold1center" color="black">
                 {title}
             </Typography>
             {inputs.map((selectItem, index) => typeChecking(selectItem, index))}

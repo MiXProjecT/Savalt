@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IForm, IQuizList } from './types';
+import { IForm } from './types';
 import {
     CloudWrapper,
     ControlButtonsWrapper,
@@ -13,20 +13,23 @@ import { Button, Typography } from '../../../../../../components';
 import { QUIZ_LIST } from './constants';
 import { Cloud, QuestionModule } from './components';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 
 const Quiz = () => {
     const [counter, setCounter] = useState(0);
     const {
         register,
         handleSubmit,
+        setValue,
         control,
-        getValues,
         trigger,
+        watch,
         clearErrors,
         formState: { errors },
     } = useForm<IForm>();
     const step = 100 / QUIZ_LIST.length;
     const stepCloud = 224 / QUIZ_LIST.length;
+    useFormPersist('mainForm', { watch, setValue });
 
     const onSubmit: SubmitHandler<IForm> = (data) => {
         console.log(data, 'СУБМИТЕ');
@@ -55,14 +58,7 @@ const Quiz = () => {
             <ProgressBarWrapper>
                 <CloudWrapper completed={stepCloud * (counter + 1) - 26}>
                     <CounterWrapper>
-                        <Typography
-                            tag="p"
-                            weight="regular"
-                            size="subtext"
-                            textDecoration="none"
-                            textAlign="left"
-                            color="white"
-                        >
+                        <Typography tag="p" variant="smallBody1regular1left" color="white">
                             {counter + 1} / {QUIZ_LIST.length}
                         </Typography>
                     </CounterWrapper>
@@ -72,7 +68,14 @@ const Quiz = () => {
                     <Filler completed={step * (counter + 1)} />
                 </ProgressBar>
             </ProgressBarWrapper>
-            <QuestionModule next={next} register={register} counter={counter} control={control} errors={errors} />
+            <QuestionModule
+                setValue={setValue}
+                next={next}
+                register={register}
+                counter={counter}
+                control={control}
+                errors={errors}
+            />
             <ControlButtonsWrapper>
                 {counter != 0 ? (
                     <Button onClick={previous} variant="control" type="button">
