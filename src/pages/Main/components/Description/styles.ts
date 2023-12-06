@@ -37,6 +37,9 @@ export const ListItem = styled.li`
     width: 100%;
     height: 100%;
     padding: 1.8rem;
+    @media (max-width: 640px) {
+        padding: 1rem;
+    }
 `;
 
 export const ListIcon = styled.img`

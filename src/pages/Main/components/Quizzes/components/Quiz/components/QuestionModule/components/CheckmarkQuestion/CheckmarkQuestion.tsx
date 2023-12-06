@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Root } from './styles';
+import React from 'react';
+import { Root, ErrorWrapper } from './styles';
 import { ICheckmarkQuestion } from './types';
 import { Typography } from '../../../../../../../../../../components';
 import { CheckboxGroup } from './components';
 import { Controller } from 'react-hook-form';
+import getData from '../../../../../../../../../../functions/getData';
 
 const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, answers, errors, control }) => {
     return (
@@ -11,18 +12,19 @@ const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, answers,
             <Typography tag="h3" variant="smallTitle1bold1center" color="black">
                 {title}
             </Typography>
-            <div>
+            <ErrorWrapper>
                 <Controller
-                    defaultValue={answers[0].value}
                     name={name}
                     control={control}
                     rules={{ required: true }}
-                    render={({ field: { onChange } }) => (
+                    defaultValue={getData(name, answers[0].value)}
+                    render={({ field: { onChange, name: fieldName } }) => (
                         <CheckboxGroup
-                            defaultValue={answers[0].value}
                             errors={!!errors[name]}
                             answers={answers}
                             onCheckChange={onChange}
+                            defaultValue={getData(name, answers[0].value)}
+                            fieldName={fieldName}
                         />
                     )}
                 />
@@ -31,7 +33,7 @@ const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, answers,
                         Выберите вариант
                     </Typography>
                 )}
-            </div>
+            </ErrorWrapper>
         </Root>
     );
 };

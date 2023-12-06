@@ -77,7 +77,7 @@ const fontSizeStyles = {
             lineHeight: '125%',
         },
         description: {
-            fontSize: '18px',
+            fontSize: '1,125rem',
             lineHeight: '140%',
         },
         subtext: {

@@ -4,9 +4,27 @@ import { IGeneralShape } from './types';
 import { Typography } from '../../../../../../../../../../components';
 import { Controller } from 'react-hook-form';
 import { GeneralShapeType } from '../../../../types';
+import getData from '../../../../../../../../../../functions/getData';
+import { CustomSelect } from './components';
+import { SingleValue } from 'react-select';
+//import AnswerTypeSelect { SingleValue } from 'react-select';
+//e: SingleValue<string>
 
-const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, register, errors }) => {
-    const typeChecking = (generalShapeInputs: GeneralShapeType, index: number) => {
+const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, errors }) => {
+    const handleSelect = (name: string, e: any) => {
+        if (e) {
+            console.log('VALUE ', e.value);
+            sessionStorage.setItem(name, JSON.stringify(e.value));
+            return e.value;
+        }
+    };
+
+    const handleChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
+        sessionStorage.setItem(name, JSON.stringify(e.currentTarget.value));
+        return e.currentTarget.value;
+    };
+
+    const typeChecking = (generalShapeInputs: GeneralShapeType) => {
         switch (generalShapeInputs.type) {
             case 'select':
                 return (
@@ -17,15 +35,15 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
                         <Controller
                             name={generalShapeInputs.name}
                             control={control}
-                            defaultValue={generalShapeInputs.answers[0].value}
-                            render={({ field: { onChange, value } }) => (
+                            defaultValue={getData(generalShapeInputs.name, generalShapeInputs.answers[0].value)}
+                            render={({ field: { onChange: onCheckChange, value, name: fieldName } }) => (
                                 <StyledSelect
                                     className="Select__container"
                                     classNamePrefix="Select"
-                                    defaultValue={generalShapeInputs.answers[0]}
-                                    value={generalShapeInputs.answers.find((c) => c.value === value)}
+                                    value={generalShapeInputs.answers.find((answer) => answer.value === value)}
                                     options={generalShapeInputs.answers}
-                                    onChange={onChange}
+                                    defaultValue={getData(generalShapeInputs.name, generalShapeInputs.answers[0].value)}
+                                    onChange={(e) => onCheckChange(handleSelect(fieldName, e))}
                                 />
                             )}
                         />
@@ -38,11 +56,20 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
                             {generalShapeInputs.title}
                         </Typography>
                         <ErrorsWrapper>
-                            <InputField
-                                errors={!!errors[generalShapeInputs.name]}
-                                {...register(generalShapeInputs.name, { required: true, minLength: 2 })}
-                                type="text"
-                                placeholder={generalShapeInputs.placeholder}
+                            <Controller
+                                name={generalShapeInputs.name}
+                                control={control}
+                                rules={{ required: true }}
+                                defaultValue={getData(generalShapeInputs.name, '')}
+                                render={({ field: { onChange: onCheckChange, name: fieldName } }) => (
+                                    <InputField
+                                        value={getData(generalShapeInputs.name, '')}
+                                        errors={!!errors[generalShapeInputs.name]}
+                                        type="text"
+                                        placeholder={generalShapeInputs.placeholder}
+                                        onChange={(e) => onCheckChange(handleChange(fieldName, e))}
+                                    />
+                                )}
                             />
                             {errors[generalShapeInputs.name] && (
                                 <Typography tag="p" variant="smallBody1regular1left" color="orange">
@@ -62,7 +89,7 @@ const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, registe
             <Typography tag="h3" variant="smallTitle1bold1center" color="black">
                 {title}
             </Typography>
-            {inputs.map((selectItem, index) => typeChecking(selectItem, index))}
+            {inputs.map((selectItem) => typeChecking(selectItem))}
         </Root>
     );
 };

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Select from 'react-select';
 import { IErrors } from './types';
 

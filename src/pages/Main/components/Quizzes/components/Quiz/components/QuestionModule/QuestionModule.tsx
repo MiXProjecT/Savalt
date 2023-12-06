@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IQuizList } from '../../types';
 import { RadioQuestion, CheckmarkQuestion, PictureQuestion, GeneralShape } from './components';
 import { QUIZ_LIST } from '../../constants';
 import { IQuestionModule } from './types';
+import { AnimationWrapper } from './styles';
 
-const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, control, counter, setValue }) => {
+const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, control, counter }) => {
+    const [state, setState] = useState(false);
+
+    useEffect(() => {
+        setState(true);
+        console.log('STATE ', state);
+    }, [counter]);
+
     const typeChecking = (quizElement: IQuizList) => {
         switch (quizElement.type) {
             case 'radio':
                 return (
                     <RadioQuestion
-                        register={register}
+                        errors={errors}
+                        control={control}
                         key={`question_module-${quizElement.id}`}
                         radio={quizElement.answers}
                         title={quizElement.title}
@@ -33,7 +42,8 @@ const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, con
                 return (
                     <PictureQuestion
                         onClick={next}
-                        register={register}
+                        control={control}
+                        errors={errors}
                         key={`picture_question-${quizElement.id}`}
                         name={quizElement.name}
                         title={quizElement.title}
@@ -45,7 +55,6 @@ const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, con
                     <GeneralShape
                         errors={errors}
                         control={control}
-                        register={register}
                         key={`general_shape-${quizElement.id}`}
                         title={quizElement.title}
                         inputs={quizElement.inputs}
@@ -56,9 +65,11 @@ const QuestionModule: React.FC<IQuestionModule> = ({ next, errors, register, con
         }
     };
 
-    const quizList = QUIZ_LIST.map((quizElement) => typeChecking(quizElement));
+    const quizList = QUIZ_LIST.map((quizElement) => (
+        <AnimationWrapper key={`animation_wrapper-${quizElement.id}`}>{typeChecking(quizElement)}</AnimationWrapper>
+    ));
 
-    return <>{quizList[counter]}</>;
+    return <React.Fragment>{quizList[counter]}</React.Fragment>;
 };
 
 export default QuestionModule;

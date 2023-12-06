@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { CheckmarkWrapper, Input, Label, Span } from './styles';
 import { ICheckboxGroup } from './types';
 
-const CheckboxGroup: React.FC<ICheckboxGroup> = ({ answers, errors, onCheckChange, defaultValue }) => {
-    const [checkedValues, setCheckedValues] = useState<string[]>([defaultValue]);
+const CheckboxGroup: React.FC<ICheckboxGroup> = ({ answers, errors, onCheckChange, defaultValue, fieldName }) => {
+    const checkType = (value: string | string[]) => (typeof value == 'string' ? [value] : value);
+
+    const [checkedValues, setCheckedValues] = useState<string[]>(checkType(defaultValue));
 
     function handleSelect(checkedName: string) {
         const newNames = checkedValues?.includes(checkedName)
             ? checkedValues?.filter((name) => name !== checkedName)
             : [...(checkedValues ?? []), checkedName];
+        console.log('newNames', newNames);
+        sessionStorage.setItem(fieldName, JSON.stringify(newNames));
         setCheckedValues(newNames);
         return newNames;
     }

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Root, TitleWrapper } from './styles';
 import { Link, Typography } from '../../../../components';
 import { Quiz } from './components';
 
 const Quizzes = () => {
     return (
-        <Root>
+        <Root id="quiz">
             <TitleWrapper>
                 <Typography tag="h2" variant="title1bold1center" color="orange">
                     ВЫБЕРИТЕ, ЧТО ВАМ ВАЖНО В РАБОТЕ, И МЫ С ВАМИ СВЯЖЕМСЯ

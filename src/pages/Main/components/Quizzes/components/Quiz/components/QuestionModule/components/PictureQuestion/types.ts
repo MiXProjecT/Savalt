@@ -1,11 +1,12 @@
 import { AnswerTypeIPicture } from '../../../../types';
-import { UseFormRegister } from 'react-hook-form';
+import { Control, FieldErrors } from 'react-hook-form';
 import { IForm } from '../../../../types';
 
 export interface IPictureQuestion {
     name: string;
     title: string;
     answer: AnswerTypeIPicture[];
+    errors: FieldErrors<IForm>;
     onClick: () => void;
-    register: UseFormRegister<IForm>;
+    control: Control<IForm>;
 }

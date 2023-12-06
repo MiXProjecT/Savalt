@@ -1,22 +1,14 @@
 import styled from 'styled-components';
 import { IErrors } from './types';
-import checkboxActive from './images/checkboxActive.svg';
-import checkbox from './images/checkbox.svg';
+import radioButtonNotActive from './images/radioButtonNotActive.svg';
+import radioButtonActive from './images/radioButtonActive.svg';
 
-export const CheckmarkWrapper = styled.div`
+export const RadioWrapper = styled.div<IErrors>`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     row-gap: 0.8rem;
-`;
-
-export const Label = styled.label<IErrors>`
-    display: block;
-    margin: 0 0 10px 0;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
     animation: ${({ errors }) => (errors ? 'shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both' : 'none')};
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
@@ -46,20 +38,31 @@ export const Label = styled.label<IErrors>`
     }
 `;
 
+export const Radio = styled.div`
+    margin-right: 30px;
+`;
+
 export const Input = styled.input`
     display: none;
 
-    &:checked + span:before {
-        background: url(${checkboxActive}) center no-repeat;
+    &:disabled + label:before {
+        filter: grayscale(100%);
+    }
+
+    &:checked + label:before {
+        background: url(${radioButtonActive}) center no-repeat;
         background-size: 100% 100%;
     }
 `;
 
-export const Span = styled.span`
+export const Label = styled.label`
     display: inline-block;
+    cursor: pointer;
     position: relative;
-    padding: 0 0 0 35px;
-    line-height: 22px;
+    padding-left: 2rem;
+    margin-right: 0;
+    line-height: 1.64rem;
+    user-select: none;
 
     &:before {
         content: '';
@@ -68,17 +71,12 @@ export const Span = styled.span`
         height: 1.5rem;
         position: absolute;
         left: 0;
-        top: 0;
-        transition: background 0.3s ease;
-        background: url(${checkbox}) center no-repeat;
+        bottom: 1px;
+        background: url(${radioButtonNotActive}) center no-repeat;
         background-size: 100% 100%;
     }
 
     &:hover:before {
-        filter: brightness(110%);
-    }
-
-    &:active:before {
-        filter: brightness(80%);
+        filter: brightness(250%);
     }
 `;

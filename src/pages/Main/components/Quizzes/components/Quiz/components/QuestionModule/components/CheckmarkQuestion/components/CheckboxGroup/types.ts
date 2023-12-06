@@ -4,7 +4,8 @@ export interface ICheckboxGroup {
     answers: AnswerTypeCheckmark[];
     errors: boolean;
     onCheckChange: (value: string[]) => void;
-    defaultValue: string;
+    defaultValue: string | string[];
+    fieldName: string;
 }
 
 export interface IErrors {

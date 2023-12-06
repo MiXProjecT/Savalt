@@ -11,88 +11,87 @@ import {
 } from './styles';
 import { Button, Typography } from '../../../../../../components';
 import { QUIZ_LIST } from './constants';
-import { Cloud, QuestionModule } from './components';
+import { Cloud, QuestionModule, PopUpThanks } from './components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useFormPersist from 'react-hook-form-persist';
 
 const Quiz = () => {
+    const [activePopUpThanks, setActivePopUpThanks] = useState(false);
     const [counter, setCounter] = useState(0);
     const {
-        register,
         handleSubmit,
-        setValue,
         control,
         trigger,
-        watch,
         clearErrors,
         formState: { errors },
     } = useForm<IForm>();
     const step = 100 / QUIZ_LIST.length;
     const stepCloud = 224 / QUIZ_LIST.length;
-    useFormPersist('mainForm', { watch, setValue });
 
     const onSubmit: SubmitHandler<IForm> = (data) => {
         console.log(data, 'СУБМИТЕ');
+        setTimeout(() => {
+            localStorage.removeItem('mainForm');
+        });
+        localStorage.removeItem('mainForm');
         setCounter(0);
+        setActivePopUpThanks(true);
     };
 
     const next = () => {
         clearErrors();
         trigger().then((result) => {
             if (result) {
-                setTimeout(() => {
+                console.log(counter, ' counter');
+                if (counter + 1 != QUIZ_LIST.length) {
                     setCounter((prev) => prev + 1);
-                }, 100);
+                    console.log(counter, ' counter');
+                    console.log(QUIZ_LIST.length, ' QUIZ_LIST.length');
+                }
             }
         });
     };
 
     const previous = () => {
-        setTimeout(() => {
-            setCounter((prev) => prev - 1);
-        }, 100);
+        setCounter((prev) => prev - 1);
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <ProgressBarWrapper>
-                <CloudWrapper completed={stepCloud * (counter + 1) - 26}>
-                    <CounterWrapper>
-                        <Typography tag="p" variant="smallBody1regular1left" color="white">
-                            {counter + 1} / {QUIZ_LIST.length}
-                        </Typography>
-                    </CounterWrapper>
-                    <Cloud color="#e75a45" />
-                </CloudWrapper>
-                <ProgressBar>
-                    <Filler completed={step * (counter + 1)} />
-                </ProgressBar>
-            </ProgressBarWrapper>
-            <QuestionModule
-                setValue={setValue}
-                next={next}
-                register={register}
-                counter={counter}
-                control={control}
-                errors={errors}
-            />
-            <ControlButtonsWrapper>
-                {counter != 0 ? (
-                    <Button onClick={previous} variant="control" type="button">
-                        ← Назад
-                    </Button>
-                ) : undefined}
-                {counter == QUIZ_LIST.length - 1 ? (
-                    <Button variant="control" type="submit">
-                        Отправить
-                    </Button>
-                ) : (
-                    <Button onClick={next} variant="control" type="button">
-                        Далее →
-                    </Button>
-                )}
-            </ControlButtonsWrapper>
-        </Form>
+        <React.Fragment>
+            {activePopUpThanks ? <PopUpThanks setActivePopUpThanks={setActivePopUpThanks} /> : undefined}
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <ProgressBarWrapper>
+                    <CloudWrapper completed={stepCloud * (counter + 1) - 26}>
+                        <CounterWrapper>
+                            <Typography tag="p" variant="smallBody1regular1left" color="white">
+                                {counter + 1} / {QUIZ_LIST.length}
+                            </Typography>
+                        </CounterWrapper>
+                        <Cloud color="#e75a45" />
+                    </CloudWrapper>
+                    <ProgressBar>
+                        <Filler completed={step * (counter + 1)} />
+                    </ProgressBar>
+                </ProgressBarWrapper>
+                <QuestionModule next={next} counter={counter} control={control} errors={errors} />
+                <ControlButtonsWrapper>
+                    {counter != 0 ? (
+                        <Button onClick={previous} variant="control" type="button">
+                            ← Назад
+                        </Button>
+                    ) : undefined}
+                    {counter + 1 != QUIZ_LIST.length ? (
+                        <Button onClick={next} variant="control" type="button">
+                            Далее →
+                        </Button>
+                    ) : undefined}
+                    {counter + 1 == QUIZ_LIST.length ? (
+                        <Button variant="control" type="submit">
+                            Отправить
+                        </Button>
+                    ) : undefined}
+                </ControlButtonsWrapper>
+            </Form>
+        </React.Fragment>
     );
 };
 

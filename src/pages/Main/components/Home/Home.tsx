@@ -52,7 +52,7 @@ const Home = () => {
                 <Link
                     color="white"
                     variant="baseButton"
-                    href="#"
+                    href="#quiz"
                     display="centeringButtonContent"
                     src={arrowOnButton}
                     fontSize="button"
