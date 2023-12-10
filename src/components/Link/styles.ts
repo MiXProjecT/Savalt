@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { IStyleLink } from './types';
-import telegram from '../../assets/images/telegram.png';
-import whatsapp from '../../assets/images/whatsapp.png';
-import mail from '../../assets/images/mail.png';
+import telegram from '@Images/telegram.png';
+import whatsapp from '@Images/whatsapp.png';
+import mail from '@Images/mail.png';
 
 const styleVariants = {
     telegramLink: {
@@ -158,7 +158,7 @@ export const LinkStyle = styled.a<IStyleLink>`
 
     &:hover {
         transform: scale(${({ variant }) => styleVariants[variant || 'base'].scale});
-        transition: transform 0.2s ease-in-out 0.2s;
+        transition: transform 0.2s;
     }
 
     @media (max-width: 1180px) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Root, ListWrapper, ListItem, ListIcon } from './styles';
-import { Typography } from '../../../../components';
+import { Typography } from '@mainComponents/index';
 import { DESCRIPTION_LIST } from './constants';
 
 const Description = () => {

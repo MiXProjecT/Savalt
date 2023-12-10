@@ -92,20 +92,6 @@ export const ImageCheck = styled.span`
 
     &:hover {
         opacity: 0.3;
+        transition: opacity 0.2s;
     }
 `;
-
-/*
-animation-duration: 0.5s;
-animation-delay: 0.2s;
-animation-name: animate-fade, animate-move;
-animation-fill-mode: backwards;
-
-@keyframes animate-fade {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}*/

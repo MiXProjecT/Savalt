@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { IButtonStyle } from './types';
-import close from '../../assets/images/close.svg';
+import close from '@Images/close.svg';
 
 const stylesButton = {
     close: {
@@ -45,4 +45,9 @@ export const ButtonStyle = styled.button<IButtonStyle>`
     cursor: pointer;
     color: white;
     font-weight: 600;
+
+    &:hover {
+        transform: scale(0.95);
+        transition: transform 0.2s;
+    }
 `;

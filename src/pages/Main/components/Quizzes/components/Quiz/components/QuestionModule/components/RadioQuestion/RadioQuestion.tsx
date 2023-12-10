@@ -1,10 +1,10 @@
 import React from 'react';
 import { Root, ErrorWrapper } from './styles';
 import { IRadioQuestion } from './types';
-import { Typography } from '../../../../../../../../../../components';
+import { Typography } from '@mainComponents/index';
 import { Controller } from 'react-hook-form';
 import { RadioGroup } from './components';
-import getData from '../../../../../../../../../../functions/getData';
+import getData from '@Functions/getData';
 
 const RadioQuestion: React.FC<IRadioQuestion> = ({ name, radio, title, control, onClick, errors }) => {
     const checkType = (value: string | string[]) => (typeof value == 'string' ? value : '');

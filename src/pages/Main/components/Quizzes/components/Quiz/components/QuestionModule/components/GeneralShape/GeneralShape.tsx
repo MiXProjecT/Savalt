@@ -1,14 +1,10 @@
 import React from 'react';
 import { Root, SelectWrapper, StyledSelect, InputTitleWrapper, InputField, ErrorsWrapper } from './styles';
 import { IGeneralShape } from './types';
-import { Typography } from '../../../../../../../../../../components';
+import { Typography } from '@mainComponents/index';
 import { Controller } from 'react-hook-form';
 import { GeneralShapeType } from '../../../../types';
-import getData from '../../../../../../../../../../functions/getData';
-import { CustomSelect } from './components';
-import { SingleValue } from 'react-select';
-//import AnswerTypeSelect { SingleValue } from 'react-select';
-//e: SingleValue<string>
+import getData from '@Functions/getData';
 
 const GeneralShape: React.FC<IGeneralShape> = ({ inputs, title, control, errors }) => {
     const handleSelect = (name: string, e: any) => {

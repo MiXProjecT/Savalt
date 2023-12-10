@@ -9,7 +9,7 @@ import {
     ProgressBar,
     ProgressBarWrapper,
 } from './styles';
-import { Button, Typography } from '../../../../../../components';
+import { Button, Typography } from '@mainComponents/index';
 import { QUIZ_LIST } from './constants';
 import { Cloud, QuestionModule, PopUpThanks } from './components';
 import { SubmitHandler, useForm } from 'react-hook-form';

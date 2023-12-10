@@ -1,10 +1,10 @@
 import React from 'react';
 import { Root, ErrorWrapper } from './styles';
 import { ICheckmarkQuestion } from './types';
-import { Typography } from '../../../../../../../../../../components';
+import { Typography } from '@mainComponents/index';
 import { CheckboxGroup } from './components';
 import { Controller } from 'react-hook-form';
-import getData from '../../../../../../../../../../functions/getData';
+import getData from '@Functions/getData';
 
 const CheckmarkQuestion: React.FC<ICheckmarkQuestion> = ({ name, title, answers, errors, control }) => {
     return (

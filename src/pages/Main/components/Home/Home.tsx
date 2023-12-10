@@ -8,10 +8,10 @@ import {
     CoverImage,
     DescriptionWrapper,
 } from './styles';
-import { Typography, Link } from '../../../../components';
-import logo from '../../../../assets/images/logo.png';
-import coverImage from '../../../../assets/images/coverImage.jpg';
-import arrowOnButton from '../../../../assets/images/arrowOnButton.svg';
+import { Typography, Link } from '@mainComponents/index';
+import logo from '@Images/logo.png';
+import coverImage from './images/coverImage.jpg';
+import arrowOnButton from './images/arrowOnButton.svg';
 
 const Home = () => {
     return (

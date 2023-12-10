@@ -1,6 +1,6 @@
 import React from 'react';
 import { Root, TitleWrapper } from './styles';
-import { Link, Typography } from '../../../../components';
+import { Link, Typography } from '@mainComponents/index';
 import { Quiz } from './components';
 
 const Quizzes = () => {

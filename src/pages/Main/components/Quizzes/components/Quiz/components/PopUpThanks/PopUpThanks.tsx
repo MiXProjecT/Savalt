@@ -1,7 +1,7 @@
 import React from 'react';
 import { Root, RootContent, TextWrapper, CloseWrapper, ContentCloseWrapper, Scrollbar } from './styles';
 import { IPopUpThanks } from './types';
-import { Button, Typography } from '../../../../../../../../components';
+import { Button, Typography } from '@mainComponents/index';
 
 const PopUpThanks: React.FC<IPopUpThanks> = ({ setActivePopUpThanks }) => {
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Label, Radio, RadioWrapper, Image, ImageCheck } from './styles';
 import { IPictureGroup } from './types';
-import { Typography } from '../../../../../../../../../../../../components';
+import { Typography } from '@mainComponents/index';
 import { CheckSvg } from './components';
 
 const PictureGroup: React.FC<IPictureGroup> = ({ answer, errors, onCheckChange, defaultValue, fieldName, onClick }) => {

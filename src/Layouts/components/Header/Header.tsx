@@ -1,6 +1,6 @@
 import React from 'react';
 import { Root, Logo, ManagersPhoneWrapper, LogoManagersPhoneWrapper } from './styles';
-import logo from '../../../assets/images/logo.png';
+import logo from '@Images/logo.png';
 import { Link, Typography } from '../../../components';
 
 const Header = () => {

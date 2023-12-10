@@ -1,6 +1,17 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
+    "paths": {
+      "@mainComponents/*": [
+        "components/*"
+      ],
+      "@Functions/*": [
+        "functions/*"
+      ],
+      "@Images/*": [
+        "assets/images/*"
+      ],
+    },
     "outDir": "./dist",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -13,11 +24,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react",
-    "declaration": true,
+    "declaration": true
   },
   "include": [
     "./src/*",
     "./src/**/*",
     "./jest.setup.ts"
-  ]
+  ],
 }
